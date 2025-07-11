@@ -1,44 +1,44 @@
-import tempfile, os
-from langchain_community.document_loaders import CSVLoader, PyPDFLoader, UnstructuredWordDocumentLoader
+# vector.py
+import os
+import tempfile
+import docx
+from langchain.document_loaders import CSVLoader, PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
-from langchain_chroma import Chroma
+from langchain.vectorstores import FAISS
 from langchain_core.documents import Document
-import docx
 
 def process_file(uploaded_file):
     """
-    1) Save the upload locally
-    2) Load & chunk documents
-    3) Build Chroma vector store
+    1) Save upload locally
+    2) Load & chunk docs
+    3) Build FAISS index (no SQLite dependency)
     4) Return (retriever, chunk_count)
     """
-    # save
+    # 1. Persist the upload
     path = os.path.join(tempfile.gettempdir(), uploaded_file.name)
     with open(path, "wb") as f:
         f.write(uploaded_file.getbuffer())
 
-    # load
+    # 2. Load raw documents
     ext = os.path.splitext(uploaded_file.name)[1].lower()
     if ext == ".csv":
         docs = CSVLoader(path).load()
     elif ext == ".pdf":
         docs = PyPDFLoader(path).load()
-    else:
+    else:  # .docx
         word = docx.Document(path)
         paras = [p.text for p in word.paragraphs if p.text.strip()]
         docs = [Document(page_content="\n\n".join(paras), metadata={})]
 
-    # chunk
+    # 3. Chunk text
     splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     chunks = splitter.split_documents(docs)
     n = len(chunks)
 
-    # build vector store
+    # 4. Build FAISS vector store
     embeddings = OllamaEmbeddings(model="mxbai-embed-large")
-    db = Chroma(persist_directory=None, embedding_function=embeddings)
-    if n > 0:
-        db.add_documents(chunks)
+    faiss_index = FAISS.from_documents(chunks, embeddings)
 
-    retriever = db.as_retriever(search_kwargs={"k": 5})
+    retriever = faiss_index.as_retriever(search_kwargs={"k": 5})
     return retriever, n
