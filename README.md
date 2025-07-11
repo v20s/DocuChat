@@ -16,6 +16,7 @@
 
 ## 🖼️ UI Preview
 
+https://github.com/v20s/DocuChat/blob/main/assests/Ui.png
 
 ---
 
