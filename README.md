@@ -10,13 +10,13 @@
 ---
 ## 📽️ Live Demo
 
-(https://github.com/v20s/DocuChat/blob/main/assests/Demo.mov)
+▶️ [Watch Live Demo](https://github.com/v20s/DocuChat/raw/main/assets/Demo.mov)
 
 ---
 
 ## 🖼️ UI Preview
 
-https://github.com/v20s/DocuChat/blob/main/assests/Ui.png
+![UI Preview](https://github.com/v20s/DocuChat/raw/main/assests/Ui.png)
 
 ---
 
