@@ -1,5 +1,5 @@
 import tempfile, os
-+from langchain_community.document_loaders import CSVLoader, PyPDFLoader, UnstructuredWordDocumentLoader
+from langchain_community.document_loaders import CSVLoader, PyPDFLoader, UnstructuredWordDocumentLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
