@@ -10,7 +10,7 @@
 ---
 ## 📽️ Live Demo
 
-[https://github.com/v20s/DocuChat/assets/demo.mov](https://github.com/v20s/DocuChat/blob/main/assests/Demo.mov)
+(https://github.com/v20s/DocuChat/blob/main/assests/Demo.mov)
 
 ---
 
