@@ -43,14 +43,18 @@ https://github.com/v20s/DocuChat/blob/main/assests/Ui.png
 ## 🔧 Setup
 
 - Clone the repository
-git clone https://github.com/yourusername/DocuChat.git
-cd DocuChat
+  ```bash
+  git clone https://github.com/yourusername/DocuChat.git
+  cd DocuChat
 - Create a virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 - Install dependencies
-pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
 - Launch the app
-streamlit run main.py
+  ```bash
+  streamlit run main.py
 
 ---
